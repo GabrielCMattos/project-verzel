@@ -4,4 +4,4 @@ const Movie = () => {
     )
 }
 
-export default Movie
+export default Movie;
