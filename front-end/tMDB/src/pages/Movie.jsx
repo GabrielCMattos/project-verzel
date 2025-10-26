@@ -11,17 +11,24 @@ const Movie = () => {
   const [movie, setMovie] = useState(null);
 
   const getMovie = async () => {
-    const res = await fetch(`${API_URL}/movies/${id}`);
-    const data = await res.json();
-    setMovie(data);
+    try {
+      const res = await fetch(`${API_URL}/movies/movie/${id}`);
+      const data = await res.json();
+      setMovie(data);
+    } catch (error) {
+      console.error("Erro ao buscar detalhes do filme:", error);
+    }
   };
 
   const formatCurrency = (number) =>
-    number.toLocaleString("en-US", { style: "currency", currency: "USD" });
+    number?.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
 
   useEffect(() => {
     getMovie();
-  }, []);
+  }, [id]);
 
   return (
     <div className="movie-page">
@@ -30,19 +37,19 @@ const Movie = () => {
           <MovieCard movie={movie} showLink={false} />
           <p className="tagline">{movie.tagline}</p>
           <div className="info">
-            <h3><BsWallet2 /> Budget:</h3>
+            <h3><BsWallet2 /> Orçamento:</h3>
             <p>{formatCurrency(movie.budget)}</p>
           </div>
           <div className="info">
-            <h3><BsGraphUp /> Revenue:</h3>
+            <h3><BsGraphUp /> Faturamento:</h3>
             <p>{formatCurrency(movie.revenue)}</p>
           </div>
           <div className="info">
-            <h3><BsHourglassSplit /> Runtime:</h3>
+            <h3><BsHourglassSplit /> Duração:</h3>
             <p>{movie.runtime} minutes</p>
           </div>
           <div className="info">
-            <h3><BsFillFileEarmarkTextFill /> Overview:</h3>
+            <h3><BsFillFileEarmarkTextFill /> Sinopse:</h3>
             <p className="description">{movie.overview}</p>
           </div>
         </>
