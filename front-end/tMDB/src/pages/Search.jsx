@@ -11,13 +11,17 @@ const Search = () => {
   const query = searchParams.get("q");
 
   const getSearchedMovies = async () => {
-    const res = await fetch(`${API_URL}/movies/search?query=${query}`);
-    const data = await res.json();
-    setMovies(data.results);
+    try {
+      const res = await fetch(`${API_URL}/movies/search?q=${query}`);
+      const data = await res.json();
+      setMovies(data.results || []); 
+    } catch (error) {
+      console.error("Erro ao buscar filmes:", error);
+    }
   };
 
   useEffect(() => {
-    getSearchedMovies();
+    if (query) getSearchedMovies();
   }, [query]);
 
   return (
