@@ -44,23 +44,23 @@ const Movie = () => {
                         </h3>
                         <p>{formatCurrency(movie.budget)}</p>
                     </div>
-                                        <div className="info">
+                    <div className="info">
                         <h3>
                             <BsGraphUp /> Revenue:
                         </h3>
                         <p>{formatCurrency(movie.revenue)}</p>
                     </div>
-                                        <div className="info">
+                    <div className="info">
                         <h3>
                             <BsHourglassSplit /> Runtime:
                         </h3>
                         <p>{movie.runtime} minutes</p>
                     </div>
-                                        <div className="info">
-                        <h3>
+                    <div className="info">
+                        <h3 >
                             <BsFillFileEarmarkTextFill /> Overview:
                         </h3>
-                        <p>{movie.overview}</p>
+                        <p className="description">{movie.overview}</p>
                     </div>
                 </>
             )}
