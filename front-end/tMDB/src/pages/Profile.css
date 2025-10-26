@@ -2,10 +2,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
+  height: 100vh; /* antes estava min-height: 80vh */
   background-color: #0d0d0d;
   color: #fff;
 }
+
 
 .profile-card {
   background-color: #1a1a1a;

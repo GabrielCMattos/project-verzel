@@ -2,11 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
+  height: 100vh; /* antes estava min-height: 80vh */
   background-color: #0d0d0d;
   color: #fff;
 }
-
 .auth-card {
   background: #1a1a1a;
   border-radius: 12px;
