@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
 import MovieCard from "../components/MovieCard";
+import "./MovieGrid.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
-
-import "./MovieGrid.css";
 
 const Home = () => {
   const [topMovies, setTopMovies] = useState([]);
 
   const getTopRatedMovies = async () => {
-    const res = await fetch(`${API_URL}/movies/search?query=top_rated`);
-    const data = await res.json();
-    setTopMovies(data.results);
+    try {
+      const res = await fetch(`${API_URL}/movies/top-rated`);
+      const data = await res.json();
+      setTopMovies(data.results || []); 
+    } catch (error) {
+      console.error("Erro ao carregar filmes:", error);
+    }
   };
 
   useEffect(() => {
