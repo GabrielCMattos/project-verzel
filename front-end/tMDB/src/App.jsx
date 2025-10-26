@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Movie from "./pages/Movie";
 import Search from "./pages/Search";
@@ -8,9 +8,12 @@ import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar";
 
 function App() {
+  const location = useLocation();
+  const hideNavbar = ["/login", "/register"].includes(location.pathname);
+
   return (
     <>
-      <Navbar />
+      {!hideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movie/:id" element={<Movie />} />
