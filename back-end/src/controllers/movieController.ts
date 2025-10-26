@@ -5,9 +5,10 @@ export const MovieController = {
   async getTopRated(req: Request, res: Response) {
     try {
       const data = await TmdbRepository.getTopRatedMovies();
-      return res.json(data);
+      res.json(data);
     } catch (error: any) {
-      return res.status(500).json({ error: error.message });
+      console.error("Erro Controller:", error.message);
+      res.status(500).json({ error: "Erro ao buscar filmes populares." });
     }
   },
 
@@ -15,9 +16,10 @@ export const MovieController = {
     try {
       const { id } = req.params;
       const data = await TmdbRepository.getMovieById(id);
-      return res.json(data);
+      res.json(data);
     } catch (error: any) {
-      return res.status(500).json({ error: error.message });
+      console.error("Erro Controller:", error.message);
+      res.status(500).json({ error: "Erro ao buscar detalhes do filme." });
     }
   },
 
@@ -25,9 +27,10 @@ export const MovieController = {
     try {
       const { q } = req.query;
       const data = await TmdbRepository.searchMovies(q as string);
-      return res.json(data);
+      res.json(data);
     } catch (error: any) {
-      return res.status(500).json({ error: error.message });
+      console.error(" Erro Controller:", error.message);
+      res.status(500).json({ error: "Erro ao buscar filmes por nome." });
     }
   },
 };

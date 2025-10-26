@@ -3,8 +3,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const baseUrl = process.env.TMDB_BASE_URL;
-const apiKey = process.env.TMDB_API_KEY;
+const baseUrl = process.env.TMDB_BASE_URL!;
+const apiKey = process.env.TMDB_API_KEY!;
 
 export const TmdbRepository = {
   async getTopRatedMovies() {
@@ -18,7 +18,7 @@ export const TmdbRepository = {
       return response.data;
     } catch (error: any) {
       console.error("Erro TMDB Repository:", error.response?.data || error.message);
-      throw new Error("Erro ao buscar filmes no TMDB");
+      throw error;
     }
   },
 
@@ -33,7 +33,7 @@ export const TmdbRepository = {
       return response.data;
     } catch (error: any) {
       console.error("Erro TMDB Repository:", error.response?.data || error.message);
-      throw new Error("Erro ao buscar detalhes do filme no TMDB");
+      throw error;
     }
   },
 
@@ -49,7 +49,7 @@ export const TmdbRepository = {
       return response.data;
     } catch (error: any) {
       console.error("Erro TMDB Repository:", error.response?.data || error.message);
-      throw new Error("Erro ao buscar filmes por pesquisa");
+      throw error;
     }
   },
 };
