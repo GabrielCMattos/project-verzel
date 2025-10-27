@@ -107,11 +107,22 @@ export const updateProfile = async (req: Request, res: Response) => {
   }
 };
 
-
 export const getProfile = async (req: Request, res: Response) => {
   try {
-    const userId = (req as any).userId;
-    const user = await prisma.user.findUnique({ where: { id: userId } });
+
+    const idParam = req.params.id ? parseInt(req.params.id) : null;
+
+
+    const userId = idParam || (req as any).userId;
+
+    if (!userId) {
+      return res.status(400).json({ message: "ID do usuário não fornecido." });
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      include: { favorites: true },
+    });
 
     if (!user) {
       return res.status(404).json({ message: "Usuário não encontrado." });
@@ -124,3 +135,4 @@ export const getProfile = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Erro ao buscar perfil." });
   }
 };
+
