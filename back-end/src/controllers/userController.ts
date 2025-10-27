@@ -5,6 +5,11 @@ import jwt from "jsonwebtoken";
 import fs from "fs";
 import path from "path";
 
+interface MulterRequest extends Request {
+  file?: Express.Multer.File;
+}
+
+
 export const registerUser = async (req: Request, res: Response) => {
   try {
     const { name, email, password } = req.body;
