@@ -2,20 +2,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* antes estava min-height: 80vh */
+  height: 100vh;
   background-color: #0d0d0d;
   color: #fff;
 }
 
-
 .profile-card {
   background-color: #1a1a1a;
-  padding: 40px 60px;
+  padding: 40px 50px;
   border-radius: 12px;
-  text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
   width: 100%;
   max-width: 450px;
+  text-align: center;
+}
+
+.profile-card h2 {
+  color: #e50914;
+  margin-bottom: 20px;
+}
+
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .profile-avatar {
@@ -24,46 +35,54 @@
   border-radius: 50%;
   border: 3px solid #e50914;
   object-fit: cover;
-  margin-bottom: 20px;
-}
-
-.profile-card h2 {
-  font-size: 24px;
-  color: #e50914;
   margin-bottom: 10px;
 }
 
-.profile-email {
-  font-size: 15px;
-  color: #bbb;
-  margin-bottom: 10px;
-}
-
-.profile-bio {
+.profile-card input,
+.profile-card textarea {
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background-color: #121212;
+  color: #fff;
   font-size: 14px;
-  margin-bottom: 20px;
-  color: #ddd;
-  line-height: 1.5;
 }
 
-.logout-btn {
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+.save-btn {
   background-color: #e50914;
   color: #fff;
   border: none;
-  padding: 12px 20px;
+  padding: 12px;
+  width: 100%;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s;
 }
 
-.logout-btn:hover {
+.save-btn:hover {
   background-color: #f6121d;
 }
 
-.loading {
-  text-align: center;
-  color: #ccc;
-  margin-top: 50px;
-  font-size: 18px;
+.logout-btn {
+  margin-top: 15px;
+  background: none;
+  border: 1px solid #e50914;
+  color: #e50914;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.logout-btn:hover {
+  background-color: #e50914;
+  color: #fff;
 }
