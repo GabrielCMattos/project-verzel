@@ -21,38 +21,40 @@ const Movie = () => {
   };
 
   const formatCurrency = (number) =>
-    number?.toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-    });
+    number?.toLocaleString("en-US", { style: "currency", currency: "USD" });
 
   useEffect(() => {
     getMovie();
   }, [id]);
 
   return (
-    <div className="movie-page">
+    <div className="details-page">
       {movie && (
         <>
           <MovieCard movie={movie} showLink={false} />
-          <p className="tagline">{movie.tagline}</p>
-          <div className="info">
+          <p className="details-tagline">{movie.tagline}</p>
+
+          <div className="details-info">
             <h3><BsWallet2 /> Orçamento:</h3>
             <p>{formatCurrency(movie.budget)}</p>
           </div>
-          <div className="info">
+
+          <div className="details-info">
             <h3><BsGraphUp /> Faturamento:</h3>
             <p>{formatCurrency(movie.revenue)}</p>
           </div>
-          <div className="info">
+
+          <div className="details-info">
             <h3><BsHourglassSplit /> Duração:</h3>
-            <p>{movie.runtime} minutes</p>
+            <p>{movie.runtime} minutos</p>
           </div>
-          <div className="info">
+
+          <div className="details-info">
             <h3><BsFillFileEarmarkTextFill /> Sinopse:</h3>
-            <p className="description">{movie.overview}</p>
+            <p className="details-description">{movie.overview}</p>
           </div>
-          <div className="extra-info">
+
+          <div className="details-extra">
             <p><strong>Gêneros:</strong> {movie.genres.map(g => g.name).join(", ")}</p>
             <p><strong>Lançamento:</strong> {movie.release_date}</p>
             <p><strong>País:</strong> {movie.production_countries?.[0]?.name}</p>

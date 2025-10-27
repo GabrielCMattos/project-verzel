@@ -1,4 +1,4 @@
-.movie-page {
+.details-page {
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -10,46 +10,32 @@
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(229, 9, 20, 0.2);
 }
-
-.movie-page svg {
+.details-page svg {
   font-size: 1.4rem;
   color: #e50914;
 }
-
-.movie-page .movie-card {
+.details-page .movie-card {
   text-align: center;
 }
-
-.movie-page .movie-card img {
+.details-page .movie-card img {
   max-width: 100%;
   border-radius: 10px;
   margin-bottom: 1rem;
   box-shadow: 0 0 15px rgba(229, 9, 20, 0.3);
 }
-
-.movie-page .movie-card h2 {
+.details-page .movie-card h2 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
   color: #e50914;
 }
-
-.movie-page .movie-card p {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  font-size: 1rem;
-}
-
-.tagline {
+.details-tagline {
   text-align: center;
   font-size: 1.2rem;
   font-style: italic;
   color: #ccc;
   margin: 1rem 0 2rem;
 }
-
-.info {
+.details-info {
   width: 100%;
   background: #181818;
   border-radius: 8px;
@@ -57,21 +43,18 @@
   margin-bottom: 1.2rem;
   box-shadow: inset 0 0 10px rgba(229, 9, 20, 0.2);
 }
-
-.info h3 {
+.details-info h3 {
   color: #e50914;
   margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-
-.info p {
+.details-info p {
   color: #ddd;
   font-size: 0.95rem;
 }
-
-.description {
+.details-description {
   margin-top: 1.5rem;
   line-height: 1.6rem;
   color: #eee;
@@ -80,8 +63,7 @@
   border-radius: 10px;
   box-shadow: inset 0 0 10px rgba(229, 9, 20, 0.2);
 }
-
-.extra-info {
+.details-extra {
   background: #141414;
   padding: 1rem 1.5rem;
   border-radius: 10px;
@@ -89,8 +71,6 @@
   color: #bbb;
   box-shadow: inset 0 0 10px rgba(229, 9, 20, 0.2);
 }
-
-.extra-info p strong {
+.details-extra p strong {
   color: #e50914;
 }
-
