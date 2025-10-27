@@ -1,88 +1,62 @@
 .profile-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #0d0d0d;
   color: #fff;
-}
-
-.profile-card {
-  background-color: #1a1a1a;
-  padding: 40px 50px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-  width: 100%;
-  max-width: 450px;
-  text-align: center;
-}
-
-.profile-card h2 {
-  color: #e50914;
-  margin-bottom: 20px;
-}
-
-.avatar-container {
+  background-color: #0d0d0d;
+  min-height: 100vh;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+}
+
+.profile-card {
+  background-color: #151515;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  width: 350px;
+  margin-bottom: 2rem;
 }
 
 .profile-avatar {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  border: 3px solid #e50914;
   object-fit: cover;
-  margin-bottom: 10px;
+  border: 2px solid #e50914;
+  margin-bottom: 1rem;
 }
 
-.profile-card input,
-.profile-card textarea {
-  width: 100%;
-  margin: 10px 0;
-  padding: 12px;
-  border-radius: 6px;
-  border: 1px solid #333;
-  background-color: #121212;
-  color: #fff;
-  font-size: 14px;
-}
-
-textarea {
-  resize: none;
-  height: 80px;
-}
-
-.save-btn {
+.edit-btn {
   background-color: #e50914;
-  color: #fff;
   border: none;
-  padding: 12px;
+  padding: 0.6rem 1rem;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.favorites-section {
+  max-width: 900px;
+  width: 100%;
+}
+
+.favorites-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.fav-item {
+  background-color: #151515;
+  border-radius: 8px;
+  padding: 0.5rem;
+  text-align: center;
+  width: 150px;
+}
+
+.fav-item img {
   width: 100%;
   border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.2s;
-}
-
-.save-btn:hover {
-  background-color: #f6121d;
-}
-
-.logout-btn {
-  margin-top: 15px;
-  background: none;
-  border: 1px solid #e50914;
-  color: #e50914;
-  padding: 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.logout-btn:hover {
-  background-color: #e50914;
-  color: #fff;
 }

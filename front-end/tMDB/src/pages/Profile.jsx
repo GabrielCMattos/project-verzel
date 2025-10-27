@@ -1,110 +1,59 @@
 import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { apiFetch } from "../services/api";
 import "./Profile.css";
 
-const API_URL = import.meta.env.VITE_API_URL;
-
 const Profile = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const loggedUser = JSON.parse(localStorage.getItem("user"));
   const [user, setUser] = useState(null);
-  const [name, setName] = useState("");
-  const [bio, setBio] = useState("");
-  const [password, setPassword] = useState("");
-  const [avatar, setAvatar] = useState(null);
-  const [preview, setPreview] = useState("");
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    const userData = localStorage.getItem("user");
-    if (userData) {
-      const parsed = JSON.parse(userData);
-      setUser(parsed);
-      setName(parsed.name);
-      setBio(parsed.bio || "");
-      setPreview(parsed.avatarUrl || "");
-    }
-  }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const token = localStorage.getItem("token");
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("bio", bio);
-    if (password) formData.append("password", password);
-    if (avatar) formData.append("avatar", avatar);
-
-    const res = await fetch(`${API_URL}/users/profile`, {
-      method: "PUT",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
-    });
-
-    const data = await res.json();
-    if (data.id) {
-      localStorage.setItem("user", JSON.stringify(data));
-      alert("Perfil atualizado com sucesso!");
+    const fetchProfile = async () => {
+      const data = await apiFetch(`/users/${id}`);
       setUser(data);
-    }
-  };
+      const favs = await apiFetch(`/favorites/${id}`);
+      setFavorites(favs);
+    };
+    fetchProfile();
+  }, [id]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    window.location.href = "/login";
-  };
+  if (!user) return <p>Carregando...</p>;
 
   return (
     <div className="profile-page">
       <div className="profile-card">
-        <h2>Meu Perfil</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="avatar-container">
-            <img
-              src={
-                preview ||
-                "https://i.ibb.co/5GzXkwq/default-avatar.png"
-              }
-              alt="Avatar"
-              className="profile-avatar"
-            />
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files[0];
-                setAvatar(file);
-                setPreview(URL.createObjectURL(file));
-              }}
-            />
-          </div>
+        <img
+          src={user.avatarUrl ? `${import.meta.env.VITE_API_URL}/${user.avatarUrl}` : "/default-avatar.png"}
+          alt="avatar"
+          className="profile-avatar"
+        />
+        <h2>{user.name}</h2>
+        <p>{user.bio || "Sem biografia ainda."}</p>
 
-          <input
-            type="text"
-            value={name}
-            placeholder="Seu nome"
-            onChange={(e) => setName(e.target.value)}
-          />
-
-          <textarea
-            placeholder="Escreva sua bio..."
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-          ></textarea>
-
-          <input
-            type="password"
-            placeholder="Nova senha (opcional)"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          <button type="submit" className="save-btn">
-            Salvar Alterações
+        {loggedUser?.id === user.id && (
+          <button className="edit-btn" onClick={() => navigate("/edit-profile")}>
+            Editar perfil
           </button>
-        </form>
+        )}
+      </div>
 
-        <button className="logout-btn" onClick={handleLogout}>
-          Sair
-        </button>
+      <div className="favorites-section">
+        <h3>Filmes favoritos</h3>
+        <div className="favorites-grid">
+          {favorites.length === 0 ? (
+            <p>Este usuário ainda não favoritou nenhum filme.</p>
+          ) : (
+            favorites.map((fav) => (
+              <div key={fav.id} className="fav-item">
+                <img src={`https://image.tmdb.org/t/p/w200${fav.poster}`} alt={fav.title} />
+                <p>{fav.title}</p>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
