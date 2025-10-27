@@ -1,63 +1,96 @@
 .movie-page {
-    color: white;
-    display: flex;
-    flex-direction: column;
-    max-width: 600px;
-    margin: 2rem auto;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #111;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.2);
 }
 
-.movie-page svg{
-    font-size: 1.5rem;
-    color: #f7d354;
+.movie-page svg {
+  font-size: 1.4rem;
+  color: #e50914;
 }
 
-.movie-page .movie-card{
-    text-align: center;
+.movie-page .movie-card {
+  text-align: center;
 }
 
-.movie-page .movie-card img,
-.movie-page .movie-card h2,
-.movie-page .movie-card p{
-    margin-bottom: 1rem;
+.movie-page .movie-card img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 15px rgba(229, 9, 20, 0.3);
 }
 
-.movie-page .movie-card img{
-    background-color: #111;
-    padding: 1rem;
+.movie-page .movie-card h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #e50914;
 }
 
-.movie-page .movie-card h2{
-    font-size: 2rem;
+.movie-page .movie-card p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 1rem;
 }
 
-.movie-page .movie-card p{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .4rem;
+.tagline {
+  text-align: center;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #ccc;
+  margin: 1rem 0 2rem;
 }
 
-.tagline{
-    text-align: center;
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
+.info {
+  width: 100%;
+  background: #181818;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.2rem;
+  box-shadow: inset 0 0 10px rgba(229, 9, 20, 0.2);
 }
 
-.info{
-    margin-bottom: 1.5rem;
+.info h3 {
+  color: #e50914;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.info h3{
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: .5rem;
+.info p {
+  color: #ddd;
+  font-size: 0.95rem;
 }
 
 .description {
-    padding-bottom: 10rem;
+  margin-top: 1.5rem;
+  line-height: 1.6rem;
+  color: #eee;
+  background: #181818;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: inset 0 0 10px rgba(229, 9, 20, 0.2);
 }
 
-.description p{
-    line-height: 1.4rem;
+.extra-info {
+  background: #141414;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+  color: #bbb;
+  box-shadow: inset 0 0 10px rgba(229, 9, 20, 0.2);
 }
+
+.extra-info p strong {
+  color: #e50914;
+}
+

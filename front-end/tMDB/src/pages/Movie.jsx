@@ -52,6 +52,12 @@ const Movie = () => {
             <h3><BsFillFileEarmarkTextFill /> Sinopse:</h3>
             <p className="description">{movie.overview}</p>
           </div>
+          <div className="extra-info">
+            <p><strong>Gêneros:</strong> {movie.genres.map(g => g.name).join(", ")}</p>
+            <p><strong>Lançamento:</strong> {movie.release_date}</p>
+            <p><strong>País:</strong> {movie.production_countries?.[0]?.name}</p>
+            <p><strong>Estúdios:</strong> {movie.production_companies?.map(c => c.name).join(", ")}</p>
+          </div>
         </>
       )}
     </div>
