@@ -1,11 +1,17 @@
 import { Link } from "react-router-dom";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaHeart } from "react-icons/fa";
+import { useState } from "react";
 import "./MovieCard.css";
 
 const imageUrl = import.meta.env.VITE_IMG;
 
 const MovieCard = ({ movie, showLink = true, cardType = "default" }) => {
+  const [favorite, setFavorite] = useState(false);
   const rootClass = `card ${cardType === "carousel" ? "card-carousel" : "card-default"}`;
+
+  const toggleFavorite = () => {
+    setFavorite(!favorite);
+  };
 
   return (
     <div className={rootClass}>
@@ -15,6 +21,13 @@ const MovieCard = ({ movie, showLink = true, cardType = "default" }) => {
           alt={movie.title}
           loading="lazy"
         />
+        <button
+          className={`fav-btn ${favorite ? "active" : ""}`}
+          onClick={toggleFavorite}
+          aria-label="Favoritar"
+        >
+          <FaHeart />
+        </button>
       </div>
 
       <div className="card-overlay">
