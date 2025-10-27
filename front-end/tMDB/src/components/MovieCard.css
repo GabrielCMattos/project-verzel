@@ -1,178 +1,75 @@
+/* base */
 .card {
+  position: relative;
   border-radius: 12px;
   overflow: hidden;
   background-color: #111;
-  color: white;
+  color: #fff;
   text-align: center;
 }
 
-/* ==== CARDS DO CARROSSEL ==== */
-.card-carousel {
+/* carrossel e grid usam o mesmo padrão de poster */
+.card-poster {
   position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-carousel:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(229, 9, 20, 0.4);
+  width: 100%;
+  height: 100%;
 }
 
 .card-poster img {
   width: 100%;
-  height: 350px;
+  height: 100%;
   object-fit: cover;
-  border-radius: 8px;
+  display: block;
+  transition: transform .35s ease, opacity .35s ease;
 }
 
+/* overlay único */
 .card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: flex-start;
-}
-
-.card-carousel:hover .card-overlay {
-  opacity: 1;
+  gap: .5rem;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0,0,0,.9) 0%, rgba(0,0,0,0) 70%);
+  opacity: 0;                 /* escondido por padrão */
+  transition: opacity .3s ease;
 }
 
 .card-overlay h2 {
   font-size: 1rem;
-  font-weight: bold;
-  margin-bottom: 0.3rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-shadow: 0 2px 8px rgba(0,0,0,.8);
 }
 
 .card-overlay p {
   color: #f7d354;
-  margin-bottom: 0.5rem;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 .card-overlay a {
-  background-color: #e50914;
-  color: white;
+  align-self: center;
+  background: #e50914;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  padding: .5rem 1rem;
   border-radius: 6px;
-  padding: 0.5rem 1rem;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background 0.3s;
+  transition: background .25s ease;
 }
+.card-overlay a:hover { background: #ff1b1b; }
 
-.card-overlay a:hover {
-  background-color: #ff1b1b;
-}
+/* --- Comportamento no hover (igual para grid e carrossel) --- */
+.card:hover .card-overlay { opacity: 1; }
+.card:hover .card-poster img { transform: scale(1.04); opacity: .4; }
 
-/* ==== GRID PADRÃO (MAIS RECENTES) ==== */
-.card-default {
-  position: relative;
-  background-color: #121212;
-  padding: 1rem;
-  border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 100%;
-  max-width: 300px;
-  height: 500px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
-}
+/* ----------- Tamanhos específicos ----------- */
+/* carrossel: seu slider controla largura; só fixamos altura */
+.card-carousel { height: 350px; }
 
-.card-default:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 25px rgba(229, 9, 20, 0.4);
-}
-
-.card-default img {
-  width: 100%;
-  height: 370px;
-  object-fit: cover;
-  border-radius: 8px;
-  transition: 0.3s;
-}
-
-/* ==== HOVER NO GRID ==== */
-.card-default:hover img {
-  opacity: 0.3;
-}
-
-.card-hover-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.card-default:hover .card-hover-content {
-  opacity: 1;
-}
-
-.card-hover-content h2 {
-  font-size: 1.1rem;
-  color: #fff;
-  margin-bottom: 0.8rem;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 0.3rem 0.8rem;
-  border-radius: 5px;
-}
-
-.card-hover-content a {
-  background-color: #e50914;
-  color: #fff;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-
-.card-hover-content a:hover {
-  background-color: #ff1b1b;
-}
-
-/* ==== Info padrão (sem hover) ==== */
-.card-info {
-  margin-top: 0.8rem;
-}
-
-.card-info h2 {
-  font-size: 1rem;
-  margin-bottom: 0.4rem;
-}
-
-.card-info p {
-  color: #f7d354;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-bottom: 0.8rem;
-}
-
-.card-info a {
-  background-color: #e50914;
-  color: #fff;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.card-info a:hover {
-  background-color: #ff1b1b;
-}
+/* grid (home): respeita as alturas que você definiu na Home.css */
+.card-default { height: 500px; }
