@@ -2,51 +2,55 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 3rem;
-  background-color: #121212;
-  height: 70px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  padding: 1rem 2rem;
+  background-color: #141414;
+  border-bottom: 2px solid #e50914;
 }
 
 #navbar h2 a {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #f7d354;
+  color: #e50914;
   font-weight: bold;
-  font-size: 1.4rem;
   text-decoration: none;
 }
 
 #navbar form {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex: 1;
-  max-width: 600px;
-  margin: 0 auto;
   gap: 0.5rem;
 }
 
 #navbar input {
-  width: 100%;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  border: none;
-  font-size: 1rem;
+  padding: 0.6rem 1rem;
+  border-radius: 6px 0 0 6px;
+  border: 1px solid #333;
+  background-color: #1f1f1f;
+  color: white;
+  font-size: 0.9rem;
+  width: 380px;
+  height: 42px; 
+  transition: 0.3s ease;
+}
+
+#navbar input:focus {
   outline: none;
-  background-color: #1c1c1c;
-  color: #fff;
+  border-color: #e50914;
+  box-shadow: 0 0 5px #e50914;
+}
+
+#navbar input::placeholder {
+  color: #777;
 }
 
 #navbar form button {
-  background-color: #f7d354;
+  background-color: #e50914;
   border: none;
-  border-radius: 8px;
-  color: #000;
-  padding: 0.5rem 0.8rem;
+  border-radius: 0 6px 6px 0;
+  color: white;
+  padding: 0.6rem 0.9rem;
+  height: 42px; 
   font-size: 1.2rem;
   display: flex;
   align-items: center;
@@ -56,9 +60,7 @@
 }
 
 #navbar form button:hover {
-  background-color: transparent;
-  color: #f7d354;
-  border: 1px solid #f7d354;
+  background-color: #b00610;
 }
 
 .user-menu {
@@ -66,12 +68,11 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  margin-left: 1rem;
 }
 
 .user-avatar {
-  width: 45px;
-  height: 45px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #e50914;
@@ -84,16 +85,17 @@
 
 .dropdown-menu {
   position: absolute;
-  top: 58px;
+  top: 50px;
   right: 0;
-  background: #141414;
+  background: #1a1a1a;
+  border: 1px solid #e50914;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-  z-index: 10;
+  z-index: 20;
   display: flex;
   flex-direction: column;
-  min-width: 150px;
+  min-width: 160px;
 }
 
 .dropdown-menu button {
