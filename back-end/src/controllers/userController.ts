@@ -49,7 +49,7 @@ export const loginUser = async (req: Request, res: Response) => {
       return res.status(401).json({ message: "Senha incorreta." });
     }
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
       expiresIn: "7d",
     });
 
