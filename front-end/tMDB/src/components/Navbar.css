@@ -1,42 +1,111 @@
 #navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: #121212;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  background-color: #121212;
+  height: 70px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-#navbar h2 a{
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+#navbar h2 a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #f7d354;
+  font-weight: bold;
+  font-size: 1.4rem;
+  text-decoration: none;
 }
 
-#navbar form{
-    display: flex;
-    gap: 0.5rem;
+#navbar form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  max-width: 600px;
+  margin: 0 auto;
+  gap: 0.5rem;
 }
 
-#navbar input{
-    padding: .2rem .8rem;
-    border-radius: 4px;
-    border: none;
+#navbar input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  background-color: #1c1c1c;
+  color: #fff;
 }
 
 #navbar form button {
-    background-color: #F7D354;
-    border: 2px solid F7D354;
-    border-radius: 4px;
-    color: black;
-    padding: .3rem;
-    font-size: 1.3rem;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: .4s;
+  background-color: #f7d354;
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  padding: 0.5rem 0.8rem;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 #navbar form button:hover {
-    background-color: transparent;
-    color: #f7d354;
+  background-color: transparent;
+  color: #f7d354;
+  border: 1px solid #f7d354;
+}
+
+.user-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.user-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e50914;
+  transition: 0.3s;
+}
+
+.user-avatar:hover {
+  transform: scale(1.1);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 58px;
+  right: 0;
+  background: #141414;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+}
+
+.dropdown-menu button {
+  background: none;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.dropdown-menu button:hover {
+  background: #e50914;
 }
