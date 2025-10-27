@@ -12,6 +12,16 @@ export const MovieController = {
     }
   },
 
+  async getNowPlaying(req: Request, res: Response) {
+    try {
+      const data = await TmdbRepository.getNowPlayingMovies();
+      res.json(data);
+    } catch (error: any) {
+      console.error("Erro Controller:", error.message);
+      res.status(500).json({ error: "Erro ao buscar filmes recentes." });
+    }
+  },
+
   async getMovie(req: Request, res: Response) {
     try {
       const { id } = req.params;
@@ -29,7 +39,7 @@ export const MovieController = {
       const data = await TmdbRepository.searchMovies(q as string);
       res.json(data);
     } catch (error: any) {
-      console.error(" Erro Controller:", error.message);
+      console.error("Erro Controller:", error.message);
       res.status(500).json({ error: "Erro ao buscar filmes por nome." });
     }
   },

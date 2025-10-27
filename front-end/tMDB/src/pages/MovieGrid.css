@@ -72,3 +72,34 @@
   color: #e50914;
   border: 2px solid #e50914;
 }
+
+.slick-prev,
+.slick-next {
+  z-index: 2;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #e50914;
+  font-size: 2rem;
+  transition: 0.3s;
+}
+
+.slick-prev:hover:before,
+.slick-next:hover:before {
+  color: #ff4a4a;
+}
+
+.slick-slide > div {
+  padding: 0 10px;
+}
+
+.slick-list {
+  margin: 0 -10px;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 2rem;
+}
