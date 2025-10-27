@@ -4,7 +4,6 @@
   padding: 2rem 0;
 }
 
-/* ===== Títulos ===== */
 .home-title {
   color: #e50914;
   font-size: 2.2rem;
@@ -38,7 +37,6 @@
   font-size: 28px;
 }
 
-/* ===== Grid dos filmes recentes ===== */
 .home-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -49,7 +47,6 @@
   padding: 0 1rem;
 }
 
-/* ===== Card de filme ===== */
 .home-grid .movie-card {
   position: relative;
   width: 100%;
@@ -81,7 +78,6 @@
   transition: opacity 0.4s ease;
 }
 
-/* ===== Overlay (efeito de hover) ===== */
 .home-grid .movie-card::before {
   content: "";
   position: absolute;
@@ -148,7 +144,6 @@
   background-color: #ff1b1b;
 }
 
-/* ===== Responsividade ===== */
 @media (max-width: 1024px) {
   .home-grid {
     grid-template-columns: repeat(2, 1fr);

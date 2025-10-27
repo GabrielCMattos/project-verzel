@@ -14,7 +14,7 @@ const Search = () => {
     try {
       const res = await fetch(`${API_URL}/movies/search?q=${query}`);
       const data = await res.json();
-      setMovies(data.results || []); 
+      setMovies(data.results || []);
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
     }
@@ -25,14 +25,20 @@ const Search = () => {
   }, [query]);
 
   return (
-    <div className="container">
-      <h2 className="title">
+    <div className="home-container">
+      <h2 className="home-title">
         Resultados para: <span className="query-text">{query}</span>
       </h2>
-      <div className="movies-container">
-        {movies.length === 0 && <p>Carregando...</p>}
+
+      <div className="home-grid">
+        {movies.length === 0 && (
+          <p className="home-loading">Carregando...</p>
+        )}
+
         {movies.length > 0 &&
-          movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
+          movies.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} cardType="default" />
+          ))}
       </div>
     </div>
   );

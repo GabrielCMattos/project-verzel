@@ -1,4 +1,3 @@
-/* base */
 .card {
   position: relative;
   border-radius: 12px;
@@ -6,9 +5,14 @@
   background-color: #111;
   color: #fff;
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* carrossel e grid usam o mesmo padrão de poster */
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 25px rgba(229, 9, 20, 0.4);
+}
+
 .card-poster {
   position: relative;
   width: 100%;
@@ -20,28 +24,36 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform .35s ease, opacity .35s ease;
+  transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
-/* overlay único */
+.card:hover .card-poster img {
+  transform: scale(1.04);
+  opacity: 0.4;
+}
+
 .card-overlay {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: .5rem;
+  gap: 0.5rem;
   padding: 1rem;
-  background: linear-gradient(to top, rgba(0,0,0,.9) 0%, rgba(0,0,0,0) 70%);
-  opacity: 0;                 /* escondido por padrão */
-  transition: opacity .3s ease;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .card-overlay {
+  opacity: 1;
 }
 
 .card-overlay h2 {
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.3;
-  text-shadow: 0 2px 8px rgba(0,0,0,.8);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .card-overlay p {
@@ -51,25 +63,28 @@
   gap: 6px;
 }
 
-.card-overlay a {
-  align-self: center;
-  background: #e50914;
+.btn {
+  display: inline-block;
+  background-color: #e50914;
   color: #fff;
-  text-decoration: none;
+  border: 2px solid #e50914;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
   font-weight: 700;
-  padding: .5rem 1rem;
-  border-radius: 6px;
-  transition: background .25s ease;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  line-height: 1;
 }
-.card-overlay a:hover { background: #ff1b1b; }
 
-/* --- Comportamento no hover (igual para grid e carrossel) --- */
-.card:hover .card-overlay { opacity: 1; }
-.card:hover .card-poster img { transform: scale(1.04); opacity: .4; }
+.btn:hover {
+  background-color: transparent;
+  color: #e50914;
+}
 
-/* ----------- Tamanhos específicos ----------- */
-/* carrossel: seu slider controla largura; só fixamos altura */
-.card-carousel { height: 350px; }
+.card-carousel {
+  height: 350px;
+}
 
-/* grid (home): respeita as alturas que você definiu na Home.css */
-.card-default { height: 500px; }
+.card-default {
+  height: 500px;
+}

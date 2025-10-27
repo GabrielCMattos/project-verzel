@@ -11,17 +11,16 @@ const MovieCard = ({ movie, showLink = true, cardType = "default" }) => {
     <div className={rootClass}>
       <div className="card-poster">
         <img
-          src={movie.poster_path ? imageUrl + movie.poster_path : "/no-image.jpg"}
+          src={movie.poster_path ? imageUrl + movie.poster_path : "/no-image.png"}
           alt={movie.title}
           loading="lazy"
         />
       </div>
 
-      {/* Overlay ÚNICO para ambos os tipos */}
       <div className="card-overlay">
         <h2>{movie.title}</h2>
         <p><FaStar /> {movie.vote_average?.toFixed(1)}</p>
-        {showLink && <Link to={`/movie/${movie.id}`}>Detalhes</Link>}
+        {showLink && <Link to={`/movie/${movie.id}`} className="btn btn-details">Detalhes</Link>}
       </div>
     </div>
   );
