@@ -1,7 +1,14 @@
-import app from "./app";
+import express from "express";
+import cors from "cors";
+import userRouter from "./routers/userRouter";
+import path from "path";
 
-const PORT = process.env.PORT || 3301;
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+app.use("/api/users", userRouter);
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+app.listen(process.env.PORT || 3301, () =>
+  console.log("Server running on port", process.env.PORT || 3301)
+);

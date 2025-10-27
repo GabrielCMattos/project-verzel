@@ -1,14 +1,14 @@
-import { Router } from "express";
-import { UserController } from "../controllers/userController";
+import express from "express";
+import multer from "multer";
+import { registerUser, loginUser, updateProfile, getProfile } from "../controllers/userController";
 import { authMiddleware } from "../middleware/authMiddleware";
 
-const router = Router();
+const router = express.Router();
+const upload = multer({ dest: "uploads/" });
 
-router.post("/register", UserController.register);
-router.post("/login", UserController.login);
-router.put("/profile", authMiddleware, UserController.updateProfile);
-router.post("/favorites", authMiddleware, UserController.addFavorite);
-router.get("/favorites", authMiddleware, UserController.getFavorites);
+router.post("/register", registerUser);
+router.post("/login", loginUser);
+router.put("/profile", authMiddleware, upload.single("avatar"), updateProfile);
+router.get("/profile", authMiddleware, getProfile);
 
 export default router;
-
