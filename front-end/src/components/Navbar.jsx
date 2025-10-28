@@ -51,7 +51,7 @@ const Navbar = () => {
     <nav id="navbar">
       <h2>
         <Link to="/">
-          <BiCameraMovie /> Verzel Movies
+          <BiCameraMovie /> CasaFilmes
         </Link>
       </h2>
 
