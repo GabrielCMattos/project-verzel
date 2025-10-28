@@ -80,7 +80,8 @@ npm install
 
 Crie o arquivo .env dentro da pasta front-end com este conteúdo: 
 
-VITE_API_URL="http://localhost:3301/api"
+VITE_API_URL=http://localhost:3301/api
+VITE_IMG=https://image.tmdb.org/t/p/w500/
 
 Depois rode o front-end com:
 
