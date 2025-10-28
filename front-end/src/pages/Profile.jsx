@@ -87,23 +87,48 @@ const Profile = () => {
 
         {favorites.length === 0 ? (
           <p>Este usuário ainda não favoritou nenhum filme.</p>
+        ) : favorites.length < 6 ? (
+          // 👇 Exibição estática se tiver menos de 6 filmes
+          <div className="favorites-grid">
+            {favorites.map((fav) => (
+              <div key={fav.id} className="fav-item">
+                <div className="fav-poster">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${fav.poster}`}
+                    alt={fav.title}
+                  />
+                </div>
+                <div className="fav-overlay">
+                  <h2>{fav.title}</h2>
+                  <a href={`/movie/${fav.movieId}`} className="btn">
+                    Detalhes
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
         ) : (
           <Slider {...sliderSettings} className="favorites-slider">
             {favorites.map((fav) => (
               <div key={fav.id} className="fav-item">
                 <div className="fav-poster">
-                  <img src={`https://image.tmdb.org/t/p/w500${fav.poster}`} alt={fav.title} />
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${fav.poster}`}
+                    alt={fav.title}
+                  />
                 </div>
                 <div className="fav-overlay">
                   <h2>{fav.title}</h2>
-                  <a href={`/movie/${fav.movieId}`} className="btn">Detalhes</a>
+                  <a href={`/movie/${fav.movieId}`} className="btn">
+                    Detalhes
+                  </a>
                 </div>
               </div>
             ))}
           </Slider>
-
         )}
       </div>
+
     </div>
   );
 };

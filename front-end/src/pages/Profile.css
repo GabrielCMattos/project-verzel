@@ -191,3 +191,27 @@
   color: #e50914;
   border: 2px solid #e50914;
 }
+
+.favorites-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.favorites-grid .fav-item {
+  position: relative;
+  width: 180px;
+  transition: transform 0.3s ease;
+}
+
+.favorites-grid .fav-item:hover {
+  transform: scale(1.05);
+}
+
+.favorites-grid img {
+  width: 100%;
+  border-radius: 8px;
+}
+
