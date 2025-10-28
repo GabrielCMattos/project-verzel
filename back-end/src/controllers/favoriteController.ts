@@ -1,39 +1,61 @@
 import { Request, Response } from "express";
 import { prisma } from "../lib/prisma";
 
+export const FavoriteController = {
+  async toggleFavorite(req: Request, res: Response) {
+    try {
+      const userId = Number((req as any).userId);
+      const { movieId, title, poster } = req.body;
+      
+      if (!userId || !movieId) {
+        return res.status(400).json({ message: "Parâmetros inválidos." });
+      }
 
-export const addFavorite = async (req: Request, res: Response) => {
-  const userId = (req as any).user.id;
-  const { movieId, title, poster } = req.body;
+      const movieIdNum = Number(movieId);
 
-  try {
-    const favorite = await prisma.favorite.create({
-      data: { userId, movieId, title, poster },
-    });
-    res.status(201).json(favorite);
-  } catch (error) {
-    res.status(500).json({ message: "Erro ao adicionar favorito" });
-  }
-};
+      const existing = await prisma.favorite.findFirst({
+        where: { userId, movieId: movieIdNum },
+      });
 
-export const removeFavorite = async (req: Request, res: Response) => {
-  const userId = (req as any).user.id;
-  const { movieId } = req.params;
+      if (existing) {
+        await prisma.favorite.delete({ where: { id: existing.id } });
+        return res.json({ message: "Filme removido dos favoritos" });
+      }
 
-  try {
-    await prisma.favorite.deleteMany({ where: { userId, movieId: Number(movieId) } });
-    res.status(200).json({ message: "Removido com sucesso" });
-  } catch {
-    res.status(500).json({ message: "Erro ao remover favorito" });
-  }
-};
+      const favorite = await prisma.favorite.create({
+        data: { movieId: movieIdNum, title, poster, userId },
+      });
 
-export const getUserFavorites = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  try {
-    const favorites = await prisma.favorite.findMany({ where: { userId: Number(id) } });
-    res.json(favorites);
-  } catch {
-    res.status(500).json({ message: "Erro ao buscar favoritos" });
-  }
+      return res.json(favorite);
+    } catch (error: any) {
+      console.error("Erro ao favoritar:", error.message || error);
+      return res.status(500).json({
+        message: "Erro ao favoritar filme.",
+        error: error.message || "Erro desconhecido",
+      });
+    }
+  },
+
+  async getUserFavorites(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const userId = Number(id);
+
+      if (!userId) {
+        return res.status(400).json({ message: "ID de usuário inválido." });
+      }
+
+      const favorites = await prisma.favorite.findMany({
+        where: { userId },
+      });
+
+      return res.json(favorites);
+    } catch (error: any) {
+      console.error("Erro ao buscar favoritos:", error.message || error);
+      return res.status(500).json({
+        message: "Erro ao buscar favoritos.",
+        error: error.message || "Erro desconhecido",
+      });
+    }
+  },
 };

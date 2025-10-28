@@ -13,13 +13,21 @@ const Login = () => {
     e.preventDefault();
     setError("");
 
-    const data = await loginUser(email, password);
-    if (data.token) {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      navigate("/profile");
-    } else {
-      setError(data.message || "Erro ao fazer login");
+    try {
+      const data = await loginUser(email, password);
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        navigate("/"); 
+      }
+    } catch (err) {
+      if (err.message.includes("Usuário não encontrado")) {
+        setError("Usuário não encontrado. Verifique o e-mail.");
+      } else if (err.message.includes("Senha incorreta")) {
+        setError("Senha incorreta. Tente novamente.");
+      } else {
+        setError("Erro ao fazer login. Tente novamente.");
+      }
     }
   };
 
@@ -44,7 +52,9 @@ const Login = () => {
           />
           <button type="submit">Login</button>
         </form>
+
         {error && <p className="error">{error}</p>}
+
         <p>
           Ainda não tem conta? <a href="/register">Cadastre-se</a>
         </p>

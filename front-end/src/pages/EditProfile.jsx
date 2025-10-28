@@ -10,15 +10,24 @@ const EditProfile = () => {
   const [bio, setBio] = useState(user?.bio || "");
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState(null);
-  const [preview, setPreview] = useState(user?.avatarUrl ? `${import.meta.env.VITE_API_URL}/${user.avatarUrl}` : "");
+  const [preview, setPreview] = useState(
+    user?.avatarUrl
+      ? user.avatarUrl.startsWith("http")
+        ? user.avatarUrl
+        : `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/${user.avatarUrl.replace(/^\//, "")}`
+      : "/default-avatar.png"
+  );
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setAvatar(file);
-    setPreview(URL.createObjectURL(file));
+    if (file) {
+      setAvatar(file);
+      setPreview(URL.createObjectURL(file)); 
+    }
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,25 +44,34 @@ const EditProfile = () => {
 
       const res = await fetch(`${import.meta.env.VITE_API_URL}/users/update`, {
         method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
         body: formData,
       });
 
-      if (!res.ok) throw new Error("Erro ao atualizar perfil");
+
+      if (!res.ok) {
+        let msg = "Erro ao atualizar perfil";
+        try {
+          const err = await res.json();
+          if (err?.message) msg = err.message;
+        } catch { }
+        throw new Error(msg);
+      }
 
       const data = await res.json();
-      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("user", JSON.stringify(data));
+      window.dispatchEvent(new Event("storage"));
       setMessage("Perfil atualizado com sucesso!");
-      setTimeout(() => navigate(`/profile/${data.user.id}`), 1500);
+      setTimeout(() => navigate(`/profile/${data.id}`), 1200);
     } catch (error) {
-      setMessage("Erro ao atualizar perfil.");
       console.error(error);
+      setMessage(error.message || "Erro ao atualizar perfil.");
     } finally {
       setLoading(false);
     }
   };
+
+
 
   return (
     <div className="edit-profile-page">

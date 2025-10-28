@@ -11,11 +11,18 @@ const Navbar = () => {
   const menuRef = useRef();
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
+    const loadUser = () => {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) setUser(JSON.parse(storedUser));
+    };
+
+    loadUser(); 
+
+    window.addEventListener("storage", loadUser);
+
+    return () => window.removeEventListener("storage", loadUser);
   }, []);
+
 
   useEffect(() => {
     const closeMenu = (e) => {
@@ -64,14 +71,17 @@ const Navbar = () => {
         <div className="user-menu" ref={menuRef}>
           <img
             src={
-              user.avatarUrl
-                ? `${import.meta.env.VITE_API_URL}/${user.avatarUrl}`
+              user?.avatarUrl
+                ? user.avatarUrl.startsWith("http")
+                  ? user.avatarUrl
+                  : `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/${user.avatarUrl.replace(/^\//, "")}`
                 : "/default-avatar.png"
             }
             alt="avatar"
             className="user-avatar"
             onClick={() => setMenuOpen(!menuOpen)}
           />
+
           {menuOpen && (
             <div className="dropdown-menu">
               <button onClick={() => navigate(`/profile/${user.id}`)}>

@@ -31,7 +31,16 @@ const Movie = () => {
     <div className="details-page">
       {movie && (
         <>
-          <MovieCard movie={movie} showLink={false} />
+          <MovieCard
+  movie={{
+    id: movie.id,
+    title: movie.title,
+    vote_average: movie.vote_average || 0,
+    poster_path: movie.poster_path || movie.poster || "",
+  }}
+  showLink={false}
+/>
+
           <p className="details-tagline">{movie.tagline}</p>
 
           <div className="details-info">

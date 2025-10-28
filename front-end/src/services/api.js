@@ -24,8 +24,6 @@ export async function apiFetch(path, options = {}) {
 
   return response.json();
 }
-
-// login do usuário
 export async function loginUser(email, password) {
   const res = await fetch(`${API_URL}/users/login`, {
     method: "POST",
@@ -33,17 +31,17 @@ export async function loginUser(email, password) {
     body: JSON.stringify({ email, password }),
   });
 
-  if (!res.ok) {
-    throw new Error("Erro no login");
-  }
+  if (res.status === 400) throw new Error("Usuário não encontrado");
+  if (res.status === 401) throw new Error("Senha incorreta");
+  if (!res.ok) throw new Error("Erro ao fazer login");
 
   const data = await res.json();
   localStorage.setItem("token", data.token);
   localStorage.setItem("user", JSON.stringify(data.user));
+
   return data;
 }
 
-// registro de usuário
 export async function registerUser(name, email, password) {
   const res = await fetch(`${API_URL}/users/register`, {
     method: "POST",
