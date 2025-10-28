@@ -111,3 +111,41 @@
 .dropdown-menu button:hover {
   background: #e50914;
 }
+
+/* ===== Botões de login/cadastro ===== */
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.auth-buttons .btn-login,
+.auth-buttons .btn-register {
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  transition: 0.3s ease;
+}
+
+.auth-buttons .btn-login {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #e50914;
+}
+
+.auth-buttons .btn-login:hover {
+  background: #e50914;
+  color: #fff;
+}
+
+.auth-buttons .btn-register {
+  background: #e50914;
+  color: #fff;
+  border: 2px solid #e50914;
+}
+
+.auth-buttons .btn-register:hover {
+  background: transparent;
+  color: #e50914;
+}

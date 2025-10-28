@@ -14,15 +14,14 @@ const Navbar = () => {
     const loadUser = () => {
       const storedUser = localStorage.getItem("user");
       if (storedUser) setUser(JSON.parse(storedUser));
+      else setUser(null);
     };
 
-    loadUser(); 
-
+    loadUser();
     window.addEventListener("storage", loadUser);
 
     return () => window.removeEventListener("storage", loadUser);
   }, []);
-
 
   useEffect(() => {
     const closeMenu = (e) => {
@@ -36,7 +35,7 @@ const Navbar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!search) return;
+    if (!search.trim()) return;
     navigate(`/search?q=${search}`);
     setSearch("");
   };
@@ -44,6 +43,7 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    setUser(null);
     navigate("/login");
   };
 
@@ -58,7 +58,7 @@ const Navbar = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Busque um filme"
+          placeholder="Busque um filme..."
           onChange={(e) => setSearch(e.target.value)}
           value={search}
         />
@@ -67,11 +67,11 @@ const Navbar = () => {
         </button>
       </form>
 
-      {user && (
+      {user ? (
         <div className="user-menu" ref={menuRef}>
           <img
             src={
-              user?.avatarUrl
+              user.avatarUrl
                 ? user.avatarUrl.startsWith("http")
                   ? user.avatarUrl
                   : `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/${user.avatarUrl.replace(/^\//, "")}`
@@ -90,6 +90,15 @@ const Navbar = () => {
               <button onClick={handleLogout}>Sair</button>
             </div>
           )}
+        </div>
+      ) : (
+        <div className="auth-buttons">
+          <Link to="/login" className="btn-login">
+            Entrar
+          </Link>
+          <Link to="/register" className="btn-register">
+            Cadastrar
+          </Link>
         </div>
       )}
     </nav>
