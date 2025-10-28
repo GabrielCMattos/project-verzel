@@ -66,6 +66,7 @@ JWT_SECRET=jwttoken
 
 Rode as migrations do prisma com: 
 npx prisma migrate dev
+docker compose up -d
 
 E inicie o servidor back-end com:
 npm run dev
